@@ -1,19 +1,25 @@
 <x-app-layout>
-    {{-- Header dengan Judul dan Form Pencarian --}}
+    {{-- Header dengan Judul dan Tombol Aksi --}}
     <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
         <h3 class="text-gray-700 text-3xl font-medium">Riwayat Rekam Medis</h3>
         
-        <form action="{{ route('dokter.rekam-medis.index') }}" method="GET">
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                    <svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none">
-                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-                <input class="w-full md:w-64 block pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                       type="text" name="search" placeholder="Cari Nama Pasien..." value="{{ request('search') }}">
-            </div>
-        </form>
+        <div class="flex items-center space-x-4">
+            {{-- Form Pencarian --}}
+            <form action="{{ route('dokter.rekam-medis.index') }}" method="GET">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none"><path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
+                    <input class="w-full md:w-64 block pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                           type="text" name="search" placeholder="Cari Nama Pasien..." value="{{ request('search') }}">
+                </div>
+            </form>
+            
+            {{-- TOMBOL BARU: Mengarahkan ke Dashboard untuk memilih pasien --}}
+            <a href="{{ route('dokter.dashboard') }}" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold whitespace-nowrap">
+                + Tambah Rekam Medis
+            </a>
+        </div>
     </div>
 
     {{-- Tabel Riwayat --}}
@@ -51,7 +57,7 @@
                     @endforelse
                 </tbody>
             </table>
-            {{-- Link Paginasi yang sudah disesuaikan --}}
+            {{-- Link Paginasi --}}
             <div class="mt-6">
                 {{ $rekamMedis->appends(['search' => request('search')])->links() }}
             </div>
