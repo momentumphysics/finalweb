@@ -1,12 +1,17 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ReceptionistController;
-use App\Http\Controllers\PatientController;
-use App\Http\Controllers\QueueController;
-use App\Http\Controllers\ScheduleController;
 
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QueueController;
+use App\Http\Controllers\ReceptionistController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PatientController;
+
+
+
+//Bagian Abdi
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,6 +26,48 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+
+
+
+//Bagian Faiqah
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Bagian Nurul Raehan
 Route::middleware(['auth', 'verified', 'is-resepsionis'])->prefix('resepsionis')->group(function () {
     // Dashboard
     Route::get('/dashboard', [ReceptionistController::class, 'index'])->name('resepsionis.dashboard');
