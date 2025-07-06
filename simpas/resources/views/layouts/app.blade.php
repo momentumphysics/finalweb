@@ -74,6 +74,9 @@
                     <a href="{{ route('dokter.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('dokter.dashboard') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold' : '' }}">
                         <span class="mx-4">Dashboard</span>
                     </a>
+                    <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('dokter.rekam-medis.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Rekam Medis</span>
+                    </a>
                     <a href="{{ route('dokter.jadwal-praktik.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('dokter.jadwal-praktik.index') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
                         <span class="mx-4">Jadwal Praktik Saya</span>
                     </a>

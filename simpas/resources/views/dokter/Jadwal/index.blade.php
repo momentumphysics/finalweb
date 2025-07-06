@@ -1,7 +1,5 @@
-<x-dokter-layout>
-    <x-slot name="header">
-        Jadwal Praktik Saya
-    </x-slot>
+<x-app-layout>
+    <h3 class="text-gray-700 text-3xl font-medium mb-6">Jadwal Praktik Saya</h3>
 
     <div class="container mx-auto bg-white p-6 rounded-lg shadow-md">
         <div class="overflow-x-auto">
@@ -16,15 +14,21 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
+                    @forelse($jadwalPribadi as $jadwal)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">01</td>
-                        <td class="px-6 py-4 whitespace-nowrap">dr. Nur Faiqatunnisa</td>
-                        <td class="px-6 py-4 whitespace-nowrap">GIGI</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Senin, Kamis, Jumat</td>
-                        <td class="px-6 py-4 whitespace-nowrap">14.00-18.00</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $jadwal->dokter->user->name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $jadwal->poli->nama_poli }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $jadwal->hari }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ \Carbon\Carbon::parse($jadwal->jam_mulai)->format('H:i') }} - {{ \Carbon\Carbon::parse($jadwal->jam_selesai)->format('H:i') }}</td>
                     </tr>
-                    </tbody>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">Jadwal tidak ditemukan.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
             </table>
         </div>
     </div>
-</x-dokter-layout>
+</x-app-layout>

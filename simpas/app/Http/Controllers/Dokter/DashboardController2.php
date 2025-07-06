@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Antrian;
+use App\Models\RekamMedis;
 use Carbon\Carbon;
 
 class DashboardController2 extends Controller
@@ -14,28 +15,28 @@ class DashboardController2 extends Controller
     {
         $user = Auth::user();
 
-        // -- AWAL PERBAIKAN --
-        // Periksa apakah pengguna yang login memiliki profil dokter terkait.
         if (!$user->dokter) {
-            // Jika tidak, logout pengguna dan arahkan kembali ke halaman login
-            // dengan pesan kesalahan.
             Auth::logout();
             return redirect()->route('login')->with('error', 'Profil dokter Anda tidak lengkap atau belum dibuat oleh Administrator.');
         }
-        // -- AKHIR PERBAIKAN --
 
         $dokterId = $user->dokter->id;
 
-        // Ambil antrean hari ini untuk dokter yang login 
+        // Get today's queue for the logged-in doctor that is not yet 'Selesai'
         $antreanHariIni = Antrian::where('dokter_id', $dokterId)
             ->whereDate('created_at', Carbon::today())
             ->where('status', '!=', 'Selesai')
-            ->with('pasien')
+            ->with('pasien', 'poli')
             ->get();
 
-        // Ambil jadwal praktik dokter 
-        $jadwalPraktik = $user->dokter->jadwal;
+        // Get the doctor's practice schedule
+        $jadwalPraktik = $user->dokter->jadwal()->with('poli')->get();
+        
+        // Get the count of visits for today
+        $kunjunganHariIni = RekamMedis::where('dokter_id', $dokterId)
+            ->whereDate('tanggal_periksa', Carbon::today())
+            ->count();
 
-        return view('dokter.dashboard', compact('antreanHariIni', 'jadwalPraktik'));
+        return view('dokter.dashboard', compact('antreanHariIni', 'jadwalPraktik', 'kunjunganHariIni'));
     }
 }
