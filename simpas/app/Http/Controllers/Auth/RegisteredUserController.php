@@ -28,32 +28,40 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:admin,resepsionis,dokter'],
-        ]);
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'role' => ['required', 'string', 'in:admin,resepsionis,dokter'],
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role' => $request->role,
+    ]);
 
-        event(new Registered($user));
+    event(new Registered($user));
 
-        Auth::login($user);
+    Auth::login($user);
 
-        // Logika Pengalihan Berdasarkan Peran (Role)
-        $url = match ($user->role) {
-            'admin' => route('admin.dashboard'),
-            'dokter' => route('dokter.dashboard'),
-            'resepsionis' => route('resepsionis.dashboard'),
-            default => route('dashboard'),
-        };
-        return redirect($url);
+    // Redirect based on role, with a check for doctor profile
+    if ($user->role === 'dokter') {
+        if ($user->dokter) {
+            return redirect()->route('dokter.dashboard');
+        } else {
+            return redirect()->route('dashboard')->with('error', 'Profil dokter Anda tidak lengkap. Silakan hubungi administrator.');
+        }
     }
+
+    $url = match ($user->role) {
+        'admin' => route('admin.dashboard'),
+        'resepsionis' => route('resepsionis.dashboard'),
+        default => route('dashboard'),
+    };
+    
+    return redirect($url);
+}
 }
