@@ -58,6 +58,9 @@ Route::middleware(['auth', 'can:is-admin'])->prefix('admin')->name('admin.')->gr
     Route::resource('pasien', PatientController2::class)->only(['index', 'edit', 'update', 'destroy']);
     Route::resource('dokter', DokterController::class);
     Route::resource('rekam-medis', RekamMedisController::class)->only(['index', 'show']);
+
+    Route::get('/laporan', [\App\Http\Controllers\Admin\LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/export', [\App\Http\Controllers\Admin\LaporanController::class, 'export'])->name('laporan.export');
 });
 
 //Bagian Faiqah
