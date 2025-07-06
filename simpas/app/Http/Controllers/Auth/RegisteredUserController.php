@@ -48,21 +48,12 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // Logika Pengalihan Berdasarkan Peran (Role)
-        $url = '';
-        switch ($user->role) {
-            case 'admin':
-                $url = 'admin/dashboard';
-                break;
-            case 'dokter':
-                $url = 'dokter/dashboard';
-                break;
-            case 'resepsionis':
-                $url = 'resepsionis/dashboard';
-                break;
-            default:
-                $url = '/dashboard';
-                break;
-        }
+        $url = match ($user->role) {
+            'admin' => route('admin.dashboard'),
+            'dokter' => route('dokter.dashboard'),
+            'resepsionis' => route('resepsionis.dashboard'),
+            default => route('dashboard'),
+        };
         return redirect($url);
     }
 }

@@ -28,18 +28,12 @@ class AuthenticatedSessionController extends Controller
 
     $request->session()->regenerate();
 
-    $url = '';
-    $userRole = Auth::user()->role;
-
-    if ($userRole === 'admin') {
-        $url = 'admin/dashboard';
-    } elseif ($userRole === 'dokter') {
-        $url = 'dokter/dashboard';
-    } elseif ($userRole === 'resepsionis') {
-        $url = 'resepsionis/dashboard';
-    } else {
-        $url = '/dashboard';
-    }
+    $url = match (Auth::user()->role) {
+        'admin' => 'admin/dashboard',
+        'dokter' => 'dokter/dashboard',
+        'resepsionis' => 'resepsionis/dashboard',
+        default => '/dashboard',
+    };
 
     return redirect()->intended($url);
     // -- AKHIR PERBAIKAN --
