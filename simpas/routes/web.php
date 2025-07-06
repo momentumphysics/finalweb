@@ -70,9 +70,11 @@ Route::middleware(['auth', 'can:is-admin'])->prefix('admin')->name('admin.')->gr
 Route::middleware(['auth', 'can:is-dokter'])->prefix('dokter')->name('dokter.')->group(function () {
     // Ubah nama route dashboard dokter
     Route::get('dashboard', [DashboardController2::class, 'index'])->name('dashboard');
-    Route::get('periksa/{antrian}', [RekamMedisController::class, 'create'])->name('periksa.create');
+    Route::get('periksa/{antrian}', [RekamMedisController2::class, 'create'])->name('periksa.create');
     Route::post('rekam-medis', [RekamMedisController2::class, 'store'])->name('rekam-medis.store');
     Route::get('jadwal-praktik', [JadwalPraktikController::class, 'index'])->name('jadwal-praktik.index');
+    Route::get('rekam-medis', [RekamMedisController2::class, 'index'])->name('rekam-medis.index');
+    Route::get('rekam-medis/{rekamMedis}', [RekamMedisController2::class, 'show'])->name('rekam-medis.show');
 });
 
 
