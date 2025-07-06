@@ -80,6 +80,11 @@ Route::middleware(['auth', 'can:is-resepsionis'])->prefix('resepsionis')->name('
     Route::get('/pasien/create', [PatientController::class, 'create'])->name('pasien.create');
     Route::post('/pasien', [PatientController::class, 'store'])->name('pasien.store');
     Route::get('/pasien/{pasien}', [PatientController::class, 'show'])->name('pasien.show');
+
+    Route::get('/pasien/{pasien}/edit', [PatientController::class, 'edit'])->name('pasien.edit');
+    Route::put('/pasien/{pasien}', [PatientController::class, 'update'])->name('pasien.update');
+    Route::delete('/pasien/{pasien}', [PatientController::class, 'destroy'])->name('pasien.destroy');
+    
     Route::get('/antrian', [QueueController::class, 'index'])->name('antrian.index');
     Route::post('/antrian', [QueueController::class, 'store'])->name('antrian.store');
     Route::get('/jadwal-dokter', [ScheduleController::class, 'index'])->name('jadwal.index');

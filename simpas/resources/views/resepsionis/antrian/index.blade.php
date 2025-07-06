@@ -10,7 +10,9 @@
                             <x-input-label for="pasien_id" :value="__('Pilih Pasien')" />
                             <select name="pasien_id" id="pasien_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300">
                                 @foreach($pasiens as $pasien)
-                                    <option value="{{ $pasien->id }}">{{ $pasien->nama }}</option>
+                                    <option value="{{ $pasien->id }}" {{ (isset($selectedPasienId) && $selectedPasienId == $pasien->id) ? 'selected' : '' }}>
+                                        {{ $pasien->nama }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
