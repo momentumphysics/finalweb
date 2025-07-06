@@ -20,7 +20,14 @@ class ReceptionistController extends Controller
         // Menghitung antrian aktif untuk hari ini
         $antrianAktif = Antrian::whereDate('created_at', Carbon::today())->count();
 
-        // Mengirim data statistik ke view 
-        return view('resepsionis.dashboard', compact('totalPasien', 'antrianAktif'));
+        // BARU: Mengambil data antrean yang sedang berlangsung (statusnya bukan 'Selesai')
+        $antrianBerlangsung = Antrian::whereDate('created_at', Carbon::today())
+                                     ->where('status', '!=', 'Selesai')
+                                     ->with(['pasien', 'dokter.user', 'poli'])
+                                     ->orderBy('id', 'asc')
+                                     ->get();
+
+        // Mengirim semua data ke view
+        return view('resepsionis.dashboard', compact('totalPasien', 'antrianAktif', 'antrianBerlangsung'));
     }
 }

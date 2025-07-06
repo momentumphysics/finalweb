@@ -22,31 +22,56 @@
                 </a>
             </div>
             <nav class="mt-4">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    <span class="mx-4">Dashboard</span>
-                </a>
-                <a href="{{ route('admin.users.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.users.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197m0 0A5.995 5.995 0 0112 12.75a5.995 5.995 0 01-3 5.197z"></path></svg>
-                    <span class="mx-4">Manajemen User</span>
-                </a>
-                {{-- Placeholder Links: Ganti href dengan route yang sesuai nanti --}}
-                <a href="{{ route('admin.pasien.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.pasien.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span class="mx-4">Manajemen Pasien</span>
-                </a>
-                <a href="{{ route('admin.dokter.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.dokter.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span class="mx-4">Manajemen Dokter</span>
-                </a>
-                <a href="{{ route('admin.rekam-medis.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.rekam-medis.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    <span class="mx-4">Rekam Medis</span>
-                </a>
-                 <a href="{{ route('admin.laporan.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.laporan.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    <span class="mx-4">Laporan</span>
-                </a>
+                {{-- =================== MENU ADMIN =================== --}}
+                @can('is-admin')
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Dashboard</span>
+                    </a>
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.users.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Manajemen User</span>
+                    </a>
+                    <a href="{{ route('admin.pasien.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.pasien.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Manajemen Pasien</span>
+                    </a>
+                    <a href="{{ route('admin.dokter.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.dokter.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Manajemen Dokter</span>
+                    </a>
+                    <a href="{{ route('admin.rekam-medis.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.rekam-medis.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Rekam Medis</span>
+                    </a>
+                    <a href="{{ route('admin.laporan.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.laporan.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Laporan</span>
+                    </a>
+                @endcan
+
+                {{-- =================== MENU RESEPSIONIS =================== --}}
+                @can('is-resepsionis')
+                    <a href="{{ route('resepsionis.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.dashboard') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Dashboard</span>
+                    </a>
+                    <a href="{{ route('resepsionis.pasien.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.pasien.index') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Manajemen Pasien</span>
+                    </a>
+                    <a href="{{ route('resepsionis.pasien.create') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.pasien.create') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Pendaftaran Pasien</span>
+                    </a>
+                    <a href="{{ route('resepsionis.antrian.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.antrian.index') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Kelola Antrian</span>
+                    </a>
+                    <a href="{{ route('resepsionis.jadwal.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.jadwal.index') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Informasi Jadwal Dokter</span>
+                    </a>
+                @endcan
+
+                {{-- =================== MENU DOKTER =================== --}}
+                @can('is-dokter')
+                    <a href="{{ route('dokter.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('dokter.dashboard') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold' : '' }}">
+                        <span class="mx-4">Dashboard</span>
+                    </a>
+                    <a href="{{ route('dokter.jadwal-praktik.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('dokter.jadwal-praktik.index') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Jadwal Praktik Saya</span>
+                    </a>
+                @endcan
             </nav>
             <div class="absolute bottom-0 w-64">
                  <form method="POST" action="{{ route('logout') }}">
