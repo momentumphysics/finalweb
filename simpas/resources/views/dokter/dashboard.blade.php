@@ -1,79 +1,42 @@
-<x-app-layout>
+<x-dokter-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard Dokter') }}
-        </h2>
+        Dashboard Dokter
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Antrean Pasien Anda</h3>
-                    @if ($antrianPasien->isEmpty())
-                        <p>Tidak ada pasien dalam antrean saat ini.</p>
-                    @else
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No. Antrean</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Pasien</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Poli Tujuan</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach ($antrianPasien as $antrian)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $antrian->nomor_antrean }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $antrian->pasien->nama }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $antrian->poli->nama }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $antrian->status }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                @if ($antrian->status === 'Menunggu')
-                                                    <a href="{{ route('dokter.mulai-periksa', $antrian->id) }}" class="text-indigo-600 hover:text-indigo-900">Mulai Periksa</a>
-                                                @else
-                                                    <span class="text-gray-500">Sudah Diperiksa</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-gray-500 text-sm font-semibold">Total Pasien Dalam Antrian</h3>
+                <p class="text-3xl font-bold">1</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-gray-500 text-sm font-semibold">Kunjungan Hari Ini</h3>
+                <p class="text-3xl font-bold">1</p>
+            </div>
+        </div>
 
-                    <h3 class="text-lg font-medium text-gray-900 mt-8 mb-4">Jadwal Praktik Saya</h3>
-                    @if ($jadwalPraktik->isEmpty())
-                        <p>Anda belum memiliki jadwal praktik.</p>
-                    @else
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hari</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jam Mulai</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jam Selesai</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Poli</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach ($jadwalPraktik as $jadwal)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $jadwal->hari }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $jadwal->jam_mulai }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $jadwal->jam_selesai }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $jadwal->poli->nama }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-bold text-lg mb-4">Jadwal Praktik Hari Ini</h3>
+                <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-r-lg">
+                    <p class="font-bold">Senin, Kamis, Jumat: 14.00 - 18.00 (Poli GIGI)</p>
                 </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-bold text-lg mb-4">Antrian Pasien</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition">
+                        <div>
+                            <p class="font-bold text-gray-800">A001 Shalsa Bila</p>
+                            <p class="text-sm text-gray-600">Poli Gigi</p>
+                        </div>
+                        <a href="#" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                            Mulai Periksa
+                        </a>
+                    </div>
+                     </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-dokter-layout>
