@@ -64,7 +64,7 @@
                     <a href="{{ route('resepsionis.rekam-medis.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.rekam-medis.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
                         <span class="mx-4">Rekam Medis</span>
                     </a>
-                    <a href="{{ route('resepsionis.jadwal.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.jadwal.index') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                    <a href="{{ route('resepsionis.jadwal.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('resepsionis.jadwal.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
                         <span class="mx-4">Informasi Jadwal Dokter</span>
                     </a>
                 @endcan

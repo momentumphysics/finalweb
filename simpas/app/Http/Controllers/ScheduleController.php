@@ -14,12 +14,38 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        // Mengambil semua data jadwal beserta relasi ke dokter dan user (untuk nama)
-        $schedules = JadwalDokter::with(['dokter.user'])->get();
+        // 1. Ambil semua data jadwal dari database
+        $allSchedules = JadwalDokter::with(['dokter.user', 'poli'])->orderBy('dokter_id')->get();
 
-        // Mengirim data ke view
-        // Anda perlu membuat file view di: resources/views/resepsionis/jadwal/index.blade.php
-        return view('resepsionis.jadwal.index', compact('schedules'));
+        // 2. Siapkan array kosong untuk menampung jadwal yang sudah dikelompokkan
+        $groupedSchedules = [];
+
+        // 3. Lakukan perulangan untuk mengelompokkan jadwal
+        foreach ($allSchedules as $schedule) {
+            // Kunci unik untuk pengelompokan: kombinasi dokter, poli, dan jam
+            $key = $schedule->dokter_id . '-' . $schedule->poli_id . '-' . $schedule->jam_mulai . '-' . $schedule->jam_selesai;
+
+            // Jika kunci ini belum ada di array, buat entri baru
+            if (!isset($groupedSchedules[$key])) {
+                $groupedSchedules[$key] = [
+                    'dokter_nama' => $schedule->dokter->user->name ?? 'N/A',
+                    'poli_nama' => $schedule->poli->nama_poli ?? 'N/A',
+                    'waktu' => Carbon::parse($schedule->jam_mulai)->format('H:i') . ' - ' . Carbon::parse($schedule->jam_selesai)->format('H:i'),
+                    'hari' => [], // Siapkan array untuk menampung hari
+                ];
+            }
+
+            // Tambahkan hari ke dalam grup yang sesuai
+            $groupedSchedules[$key]['hari'][] = $schedule->hari;
+        }
+
+        // 4. Gabungkan array hari menjadi satu string (contoh: "Senin, Selasa, Rabu")
+        foreach ($groupedSchedules as &$group) { // Gunakan reference (&) untuk mengubah langsung
+            $group['hari'] = implode(', ', $group['hari']);
+        }
+
+        // 5. Kirim data yang sudah rapi ke view
+        return view('resepsionis.jadwal.index', ['jadwalTampil' => $groupedSchedules]);
     }
 
     /**
