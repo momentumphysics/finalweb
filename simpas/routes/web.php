@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\Auth; // Tambahkan ini
 // Ganti nama kelas controller dokter agar sesuai dengan nama file
 use App\Http\Controllers\Dokter\DashboardController2;
 use App\Http\Controllers\Dokter\JadwalPraktikController;
-use App\Http\Controllers\Dokter\RekamMedisController;
+use App\Http\Controllers\Dokter\RekamMedisController2;
 
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PatientController;
-use \App\Http\Controllers\Admin\PatientController2;
+use App\Http\Controllers\Admin\PatientController2;
+use App\Http\Controllers\Admin\DokterController;
+use App\Http\Controllers\Admin\RekamMedisController;
+
 //Bagian Abdi
 Route::get('/', function () {
     return view('welcome');
@@ -53,6 +56,8 @@ Route::middleware(['auth', 'can:is-admin'])->prefix('admin')->name('admin.')->gr
     Route::resource('users', UserController::class);
 
     Route::resource('pasien', PatientController2::class)->only(['index', 'edit', 'update', 'destroy']);
+    Route::resource('dokter', DokterController::class);
+    Route::resource('rekam-medis', RekamMedisController::class)->only(['index', 'show']);
 });
 
 //Bagian Faiqah
@@ -60,7 +65,7 @@ Route::middleware(['auth', 'can:is-dokter'])->prefix('dokter')->name('dokter.')-
     // Ubah nama route dashboard dokter
     Route::get('dashboard', [DashboardController2::class, 'index'])->name('dashboard');
     Route::get('periksa/{antrian}', [RekamMedisController::class, 'create'])->name('periksa.create');
-    Route::post('rekam-medis', [RekamMedisController::class, 'store'])->name('rekam-medis.store');
+    Route::post('rekam-medis', [RekamMedisController2::class, 'store'])->name('rekam-medis.store');
     Route::get('jadwal-praktik', [JadwalPraktikController::class, 'index'])->name('jadwal-praktik.index');
 });
 

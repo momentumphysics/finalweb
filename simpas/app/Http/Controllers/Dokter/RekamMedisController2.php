@@ -8,7 +8,7 @@ use App\Models\RekamMedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RekamMedisController extends Controller
+class RekamMedisController2 extends Controller
 {
     // Menampilkan halaman form rekam medis [cite: 49]
     public function create(Antrian $antrian)
