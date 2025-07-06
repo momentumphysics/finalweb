@@ -23,23 +23,19 @@
                     <select name="poli_id" id="poli_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         <option value="">Pilih Poli</option>
                         @foreach($polis as $poli)
-                            {{-- Diasumsikan model Poli memiliki kolom 'nama_poli' --}}
-                            <option value="{{ $poli->id }}" {{ old('poli_id') == $poli->id ? 'selected' : '' }}>{{ $poli->nama_poli ?? "Poli ID {$poli->id}" }}</option>
+                            <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
                     <label for="dokter_id" class="block text-sm font-medium text-gray-700">Dokter yang Dituju</label>
-                    <select name="dokter_id" id="dokter_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                        <option value="">Pilih Dokter</option>
-                        @foreach($dokters as $dokter)
-                            <option value="{{ $dokter->id }}" {{ old('dokter_id') == $dokter->id ? 'selected' : '' }}>{{ $dokter->user->name ?? "Dokter ID {$dokter->id}" }}</option>
-                        @endforeach
+                    <select name="dokter_id" id="dokter_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" disabled>
+                        <option value="">Pilih Poli Terlebih Dahulu</option>
                     </select>
                 </div>
             </div>
 
-            {{-- Data Pasien --}}
+            {{-- Data Pasien (sudah diperbaiki) --}}
             <h4 class="text-lg font-semibold text-gray-800 mb-4 border-t pt-6">Data Pasien</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 {{-- Kolom Kiri --}}
@@ -63,8 +59,8 @@
                         <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
                         <select name="jenis_kelamin" id="jenis_kelamin" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             <option value="">Pilih Jenis Kelamin</option>
-                            <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                            <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
                 </div>
@@ -73,7 +69,7 @@
                     <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
                     <textarea name="alamat" id="alamat" rows="3" required placeholder="Alamat Lengkap Pasien" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">{{ old('alamat') }}</textarea>
                 </div>
-                <div class="md:col-span-2">
+                <div>
                     <label for="no_hp" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
                     <input type="text" name="no_hp" id="no_hp" value="{{ old('no_hp') }}" required placeholder="Nomor Telepon Aktif" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                 </div>
@@ -87,4 +83,42 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('poli_id').addEventListener('change', function() {
+            const poliId = this.value;
+            const dokterSelect = document.getElementById('dokter_id');
+            
+            // Kosongkan dan nonaktifkan dropdown dokter
+            dokterSelect.innerHTML = '<option value="">Memuat dokter...</option>';
+            dokterSelect.disabled = true;
+
+            if (poliId) {
+                // Lakukan fetch ke API untuk mendapatkan dokter berdasarkan poli
+                fetch(`/resepsionis/get-doctors-by-poli/${poliId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        dokterSelect.innerHTML = '<option value="">Pilih Dokter</option>';
+                        if (data.length > 0) {
+                            data.forEach(dokter => {
+                                // Pastikan 'user' ada di dalam objek dokter
+                                const option = document.createElement('option');
+                                option.value = dokter.id;
+                                option.textContent = dokter.user ? dokter.user.name : 'Nama Tidak Tersedia';
+                                dokterSelect.appendChild(option);
+                            });
+                            dokterSelect.disabled = false;
+                        } else {
+                            dokterSelect.innerHTML = '<option value="">Tidak ada dokter tersedia</option>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching doctors:', error);
+                        dokterSelect.innerHTML = '<option value="">Gagal memuat dokter</option>';
+                    });
+            } else {
+                dokterSelect.innerHTML = '<option value="">Pilih Poli Terlebih Dahulu</option>';
+            }
+        });
+    </script>
 </x-app-layout>

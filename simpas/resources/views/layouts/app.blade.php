@@ -36,6 +36,9 @@
                     <a href="{{ route('admin.dokter.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.dokter.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
                         <span class="mx-4">Manajemen Dokter</span>
                     </a>
+                    <a href="{{ route('admin.poli.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.poli.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
+                        <span class="mx-4">Manajemen Poli</span>
+                    </a>
                     <a href="{{ route('admin.rekam-medis.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 {{ request()->routeIs('admin.rekam-medis.*') ? 'bg-blue-100 border-l-4 border-blue-500 font-semibold text-blue-700' : '' }}">
                         <span class="mx-4">Rekam Medis</span>
                     </a>

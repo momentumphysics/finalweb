@@ -120,4 +120,20 @@ class PatientController extends Controller
         $pasien->delete();
         return redirect()->route('resepsionis.pasien.index')->with('success', 'Data pasien berhasil dihapus.');
     }
+
+    /**
+     * Mencari pasien berdasarkan nama atau nomor rekam medis.
+     */
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        if ($query) {
+            $pasiens = Pasien::where('nama', 'LIKE', "%{$query}%")
+                             ->orWhere('no_mr', 'LIKE', "%{$query}%")
+                             ->take(5) // Batasi hasil pencarian menjadi 5
+                             ->get();
+            return response()->json($pasiens);
+        }
+        return response()->json([]);
+    }
 }

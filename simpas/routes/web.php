@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth; // Tambahkan ini
 use App\Http\Controllers\Dokter\DashboardController2;
 use App\Http\Controllers\Dokter\JadwalPraktikController;
 use App\Http\Controllers\Dokter\RekamMedisController2;
+use App\Http\Controllers\Admin\PoliController;
 
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\ReceptionistController;
@@ -57,6 +58,7 @@ Route::middleware(['auth', 'can:is-admin'])->prefix('admin')->name('admin.')->gr
 
     Route::resource('pasien', PatientController2::class)->only(['index', 'edit', 'update', 'destroy']);
     Route::resource('dokter', DokterController::class);
+    Route::resource('poli', PoliController::class);
     Route::resource('rekam-medis', RekamMedisController::class)->only(['index', 'show']);
 
     Route::get('/laporan', [\App\Http\Controllers\Admin\LaporanController::class, 'index'])->name('laporan.index');
@@ -79,15 +81,19 @@ Route::middleware(['auth', 'can:is-resepsionis'])->prefix('resepsionis')->name('
     Route::get('/pasien', [PatientController::class, 'index'])->name('pasien.index');
     Route::get('/pasien/create', [PatientController::class, 'create'])->name('pasien.create');
     Route::post('/pasien', [PatientController::class, 'store'])->name('pasien.store');
+    Route::get('/pasien/search', [PatientController::class, 'search'])->name('pasien.search');
     Route::get('/pasien/{pasien}', [PatientController::class, 'show'])->name('pasien.show');
 
     Route::get('/pasien/{pasien}/edit', [PatientController::class, 'edit'])->name('pasien.edit');
     Route::put('/pasien/{pasien}', [PatientController::class, 'update'])->name('pasien.update');
     Route::delete('/pasien/{pasien}', [PatientController::class, 'destroy'])->name('pasien.destroy');
-    
+
     Route::get('/antrian', [QueueController::class, 'index'])->name('antrian.index');
     Route::post('/antrian', [QueueController::class, 'store'])->name('antrian.store');
+    Route::post('/antrian/{antrian}/finish', [QueueController::class, 'finish'])->name('antrian.finish');
+
     Route::get('/jadwal-dokter', [ScheduleController::class, 'index'])->name('jadwal.index');
+    Route::get('/get-doctors-by-poli/{poli}', [DokterController::class, 'getDokterByPoli'])->name('antrian.getDoctors');
 });
 
 require __DIR__.'/auth.php';

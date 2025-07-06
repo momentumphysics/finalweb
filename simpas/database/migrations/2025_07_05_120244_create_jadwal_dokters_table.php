@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('jadwal_dokters', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('dokter_id')->constrained('dokters')->onDelete('cascade');
+            $table->foreignId('poli_id')->constrained('polis')->onDelete('cascade');
+            $table->string('hari'); // Contoh: Senin, Selasa
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Dokter;
 use App\Models\User;
+use App\Models\Poli;
 use App\Http\Requests\StoreDokterRequest;
 use App\Http\Requests\UpdateDokterRequest;
 
@@ -53,5 +54,12 @@ class DokterController extends Controller
     {
         $dokter->delete();
         return redirect()->route('admin.dokter.index')->with('success', 'Data dokter berhasil dihapus.');
+    }
+
+    public function getDokterByPoli(Poli $poli)
+    {
+        // Cari dokter yang memiliki spesialisasi sama dengan nama poli
+        $dokters = Dokter::where('spesialisasi', $poli->nama_poli)->with('user')->get();
+        return response()->json($dokters);
     }
 }
