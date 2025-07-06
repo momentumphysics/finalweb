@@ -15,7 +15,7 @@ use App\Http\Controllers\QueueController;
 use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PatientController;
-
+use \App\Http\Controllers\Admin\PatientController2;
 //Bagian Abdi
 Route::get('/', function () {
     return view('welcome');
@@ -51,6 +51,8 @@ Route::middleware(['auth', 'can:is-admin'])->prefix('admin')->name('admin.')->gr
     // Ubah nama route dashboard admin
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
+
+    Route::resource('pasien', PatientController2::class)->only(['index', 'edit', 'update', 'destroy']);
 });
 
 //Bagian Faiqah

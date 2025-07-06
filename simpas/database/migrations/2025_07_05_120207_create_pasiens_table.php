@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
+            $table->string('no_mr')->unique()->comment('Nomor Rekam Medis');
+            $table->string('nama');
+            $table->string('no_ktp', 16)->unique();
+            $table->text('alamat');
+            $table->string('no_hp', 15);
+            $table->date('tanggal_lahir');
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->timestamps();
         });
     }
