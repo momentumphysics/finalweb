@@ -33,18 +33,36 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'string', 'in:admin,resepsionis,dokter'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Logika Pengalihan Berdasarkan Peran (Role)
+        $url = '';
+        switch ($user->role) {
+            case 'admin':
+                $url = 'admin/dashboard';
+                break;
+            case 'dokter':
+                $url = 'dokter/dashboard';
+                break;
+            case 'resepsionis':
+                $url = 'resepsionis/dashboard';
+                break;
+            default:
+                $url = '/dashboard';
+                break;
+        }
+        return redirect($url);
     }
 }
