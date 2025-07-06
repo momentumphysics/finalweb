@@ -22,16 +22,20 @@ Route::get('/', function () {
 });
 
 // Ini adalah route fallback jika tidak ada role yang cocok
+// Route::get('/dashboard', function () {
+//     // Arahkan ke dashboard yang sesuai berdasarkan peran pengguna
+//     // Ganti auth()->user() menjadi Auth::user()
+//     if (Auth::user()->role === 'admin') {
+//         return redirect()->route('admin.dashboard');
+//     } elseif (Auth::user()->role === 'dokter') {
+//         return redirect()->route('dokter.dashboard');
+//     } elseif (Auth::user()->role === 'resepsionis') {
+//         return redirect()->route('resepsionis.dashboard');
+//     }
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/dashboard', function () {
-    // Arahkan ke dashboard yang sesuai berdasarkan peran pengguna
-    // Ganti auth()->user() menjadi Auth::user()
-    if (Auth::user()->role === 'admin') {
-        return redirect()->route('admin.dashboard');
-    } elseif (Auth::user()->role === 'dokter') {
-        return redirect()->route('dokter.dashboard');
-    } elseif (Auth::user()->role === 'resepsionis') {
-        return redirect()->route('resepsionis.dashboard');
-    }
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
