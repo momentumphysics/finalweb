@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-
-
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -77,4 +74,5 @@ Route::middleware(['auth', 'verified', 'is-resepsionis'])->prefix('resepsionis')
 
     // Informasi Jadwal Dokter
     Route::get('/jadwal-dokter', [ScheduleController::class, 'index'])->name('resepsionis.jadwal.index');
+});
 require __DIR__.'/auth.php';
