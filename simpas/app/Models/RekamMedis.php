@@ -16,6 +16,7 @@ class RekamMedis extends Model
         'keluhan_utama',
         'diagnosa',
         'resep_obat',
+        'rujukan',
         'tanggal_periksa',
     ];
 

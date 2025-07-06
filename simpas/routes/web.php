@@ -75,6 +75,7 @@ Route::middleware(['auth', 'can:is-dokter'])->prefix('dokter')->name('dokter.')-
     Route::get('jadwal-praktik', [JadwalPraktikController::class, 'index'])->name('jadwal-praktik.index');
     Route::get('rekam-medis', [RekamMedisController2::class, 'index'])->name('rekam-medis.index');
     Route::get('rekam-medis/{rekamMedis}', [RekamMedisController2::class, 'show'])->name('rekam-medis.show');
+    Route::get('rekam-medis/{rekamMedis}/cetak', [RekamMedisController2::class, 'printPrescription'])->name('rekam-medis.cetak');
 });
 
 
