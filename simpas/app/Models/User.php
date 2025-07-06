@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Tambahkan ini
     ];
 
     /**
@@ -47,6 +48,6 @@ class User extends Authenticatable
     }
     
     public function dokter() {
-    return $this->hasOne(Dokter::class);
-}
+        return $this->hasOne(Dokter::class);
+    }
 }
