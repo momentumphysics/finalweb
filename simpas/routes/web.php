@@ -19,6 +19,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\Admin\PatientController2;
 use App\Http\Controllers\Admin\DokterController;
 use App\Http\Controllers\Admin\RekamMedisController;
+use App\Http\Controllers\RekamMedisController3;
 
 //Bagian Abdi
 Route::get('/', function () {
@@ -94,6 +95,9 @@ Route::middleware(['auth', 'can:is-resepsionis'])->prefix('resepsionis')->name('
 
     Route::get('/jadwal-dokter', [ScheduleController::class, 'index'])->name('jadwal.index');
     Route::get('/get-doctors-by-poli/{poli}', [DokterController::class, 'getDokterByPoli'])->name('antrian.getDoctors');
+
+    Route::get('/rekam-medis', [RekamMedisController3::class, 'index'])->name('rekam-medis.index');
+    Route::get('/rekam-medis/{rekamMedis}', [RekamMedisController3::class, 'show'])->name('rekam-medis.show');
 });
 
 require __DIR__.'/auth.php';
