@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Antrian; // Pastikan model sudah dibuat oleh Dev 1
 use Carbon\Carbon;
 
-class DashboardController extends Controller
+class DashboardController2 extends Controller
 {
     public function index()
     {
