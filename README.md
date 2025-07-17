@@ -1,10 +1,8 @@
 # Sistem Informasi Manajemen Pasien - Klinik An-Nur
-## Kelompok 1
+### Kelompok 1
 ### Muh. Abdillah HM. - 60200123040
 ### Nurul Raehan - 60200123056
 ### Nur Faiqatunnisa - 60200123053
-
-Dokumentasi proyek untuk pengembangan Sistem Informasi Manajemen Pasien (SIMPas) di Klinik An-Nur. Proyek ini bertujuan untuk mendigitalisasi alur kerja klinik mulai dari pendaftaran pasien hingga pelaporan.
 
 ## 1. Perencanaan dan Dokumentasi
 
@@ -12,7 +10,7 @@ Dokumentasi proyek untuk pengembangan Sistem Informasi Manajemen Pasien (SIMPas)
 Di banyak fasilitas kesehatan, proses manajemen pasien yang masih manual sering kali menyebabkan berbagai kendala. Masalah yang sering muncul antara lain antrian yang panjang dan tidak teratur, kesulitan dalam pencarian dan pengelolaan rekam medis pasien, serta proses rekapitulasi laporan harian atau bulanan yang memakan waktu dan rentan terhadap kesalahan. Hal ini dapat menurunkan efisiensi operasional klinik dan mempengaruhi kualitas pelayanan kepada pasien.
 
 ### Ide dan Tujuan Aplikasi
-Ide utama dari proyek ini adalah membangun sebuah Sistem Informasi Manajemen Pasien (SIMPas) berbasis web untuk Klinik An-Nur. Tujuan utamanya adalah untuk mengatasi permasalahan yang ada dengan menyediakan platform terpusat yang dapat:
+Dokumentasi proyek untuk pengembangan Sistem Informasi Manajemen Pasien (SIMPas) di Klinik An-Nur. Proyek ini bertujuan untuk mendigitalisasi alur kerja klinik mulai dari pendaftaran pasien hingga pelaporan. Ide utama dari proyek ini adalah membangun sebuah Sistem Informasi Manajemen Pasien (SIMPas) berbasis web untuk Klinik An-Nur. Tujuan utamanya adalah untuk mengatasi permasalahan yang ada dengan menyediakan platform terpusat yang dapat:
 * Mempercepat proses pendaftaran pasien baru maupun lama.
 * Mengelola alur antrian pasien secara digital dan transparan.
 * Memudahkan dokter dalam mengakses riwayat dan menginput rekam medis pasien.
