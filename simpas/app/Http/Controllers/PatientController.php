@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pasien;
 use App\Models\Poli;
 use App\Models\Dokter;
-use App\Models\Antrian; // <-- Tambahkan model Antrian
+use App\Models\Antrian;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -16,7 +16,7 @@ class PatientController extends Controller
     public function create()
     {
         $polis = Poli::all();
-        $dokters = Dokter::with('user')->get(); // Mengambil dokter beserta data user-nya
+        $dokters = Dokter::with('user')->get();
         return view('resepsionis.pasien.create', compact('polis', 'dokters'));
     }
 

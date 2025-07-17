@@ -26,5 +26,4 @@ class PatientController2 extends Controller
         return view('admin.pasien.index', compact('pasiens'));
     }
 
-    // Anda bisa menambahkan method lain seperti edit, update, destroy di sini nanti
 }
